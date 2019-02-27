@@ -1,4 +1,8 @@
-# vuetify-list
+# Vuetify List
+
+> A simple example of using `v-data-table` with an external API source, along with the ability to view individual items
+
+Thanks to [jsonplaceholder](https://jsonplaceholder.typicode.com) for the awesome API
 
 ## Project setup
 
@@ -16,12 +20,6 @@ npm run serve
 
 ```bash
 npm run build
-```
-
-### Run your tests
-
-```bash
-npm run test
 ```
 
 ### Lints and fixes files
