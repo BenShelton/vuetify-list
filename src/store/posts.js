@@ -3,12 +3,26 @@ import api from '@/api'
 const state = {
   list: [],
   total: 0,
-  loading: true
+  loading: true,
+  page: 1,
+  rowsPerPage: 10,
+  sortBy: null,
+  descending: true
+}
+
+const getters = {
+  pagination: ({ page, rowsPerPage, sortBy, descending }) => ({ page, rowsPerPage, sortBy, descending })
 }
 
 const actions = {
-  load ({ commit }, { page, limit, sort, order }) {
-    return api.posts({ page, limit, sort, order })
+  load ({ getters, commit }) {
+    const { page, rowsPerPage, sortBy, descending } = getters.pagination
+    return api.posts({
+      page,
+      limit: rowsPerPage,
+      sort: sortBy,
+      order: descending ? 'desc' : 'asc'
+    })
       .then(res => {
         commit('LOAD_LIST', {
           list: res.data,
@@ -26,6 +40,14 @@ const mutations = {
     Object.assign(state, {
       loading: true,
       error: null
+    })
+  },
+  SET_PAGINATION (state, { page, rowsPerPage, sortBy, descending }) {
+    Object.assign(state, {
+      page,
+      rowsPerPage,
+      sortBy,
+      descending
     })
   },
   LOAD_LIST (state, { list, total }) {
@@ -48,6 +70,7 @@ const mutations = {
 export default {
   namespaced: true,
   state,
+  getters,
   actions,
   mutations
 }

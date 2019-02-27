@@ -3,7 +3,7 @@
     <v-data-table
       :headers="headers"
       :items="list"
-      :pagination.sync="pagination"
+      :pagination.sync="localPagination"
       :total-items="total"
       :loading="loading"
       :rows-per-page-items="[10, 20, 50, 100]"
@@ -26,7 +26,7 @@
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex'
+import { mapState, mapGetters, mapActions, mapMutations } from 'vuex'
 
 export default {
   name: 'Home',
@@ -38,40 +38,30 @@ export default {
         { text: 'User ID', value: 'userId' },
         { text: 'Title', value: 'title' },
         { text: 'View', align: 'center', sortable: false }
-      ],
-      pagination: {
-        descending: false,
-        page: 1,
-        rowsPerPage: 10,
-        sortBy: null,
-        totalItems: 0
-      }
+      ]
     }
   },
 
   computed: {
-    ...mapState('posts', ['list', 'total', 'loading'])
-  },
-
-  watch: {
-    pagination: {
-      handler (pagination) {
-        const { descending, page, rowsPerPage, sortBy } = pagination
-        this.loadPosts({
-          page,
-          limit: rowsPerPage,
-          sort: sortBy,
-          order: descending ? 'desc' : 'asc'
-        })
+    ...mapState('posts', ['list', 'total', 'loading']),
+    ...mapGetters('posts', ['pagination']),
+    localPagination: {
+      get () {
+        return this.pagination
       },
-      deep: true,
-      immediate: true
+      set (val) {
+        this.setPagination(val)
+        this.loadPosts()
+      }
     }
   },
 
   methods: {
     ...mapActions({
       loadPosts: 'posts/load'
+    }),
+    ...mapMutations({
+      setPagination: 'posts/SET_PAGINATION'
     })
   }
 }
