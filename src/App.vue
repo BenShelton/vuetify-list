@@ -1,14 +1,14 @@
 <template>
   <v-app>
     <v-toolbar app>
-      <v-toolbar-title class="headline text-uppercase">
+      <v-toolbar-title class="headline">
         <span>Vuetify</span>
-        <span class="font-weight-light">MATERIAL DESIGN</span>
+        <span class="font-weight-light ml-3">List Example</span>
       </v-toolbar-title>
     </v-toolbar>
 
     <v-content>
-      <router-link />
+      <router-view />
     </v-content>
   </v-app>
 </template>
