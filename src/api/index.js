@@ -5,7 +5,7 @@ const api = axios.create({
 })
 
 export default {
-  posts: () => api.get(`/posts`, { params: { } }),
+  posts: ({ page, limit, sort, order }) => api.get(`/posts`, { params: { _page: page, _limit: limit, _sort: sort, _order: order } }),
   post: ({ id }) => api.get(`/posts/${id}`),
   comments: ({ id }) => api.get(`/comments`, { params: { postId: id } })
 }

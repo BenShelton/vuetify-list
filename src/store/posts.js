@@ -7,12 +7,12 @@ const state = {
 }
 
 const actions = {
-  load ({ commit }) {
-    api.posts()
+  load ({ commit }, { page, limit, sort, order }) {
+    return api.posts({ page, limit, sort, order })
       .then(res => {
         commit('LOAD_LIST', {
           list: res.data,
-          total: res.headers['X-Total-Count']
+          total: Number(res.headers['x-total-count'])
         })
       })
       .catch(err => {
