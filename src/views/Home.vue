@@ -1,5 +1,12 @@
 <template>
   <v-container>
+    <v-container grid-list-lg>
+      <v-layout wrap>
+        <SearchBox label="Post ID" field="id" />
+        <SearchBox label="User ID" field="userId" />
+        <SearchBox label="Title" field="title" />
+      </v-layout>
+    </v-container>
     <v-data-table
       :headers="headers"
       :items="list"
@@ -28,8 +35,14 @@
 <script>
 import { mapState, mapGetters, mapActions, mapMutations } from 'vuex'
 
+import SearchBox from '@/components/SearchBox.vue'
+
 export default {
   name: 'Home',
+
+  components: {
+    SearchBox
+  },
 
   data () {
     return {
