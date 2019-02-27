@@ -7,7 +7,10 @@ const state = {
   page: 1,
   rowsPerPage: 10,
   sortBy: null,
-  descending: true
+  descending: true,
+  id: null,
+  userId: null,
+  title: null
 }
 
 const getters = {
@@ -15,14 +18,19 @@ const getters = {
 }
 
 const actions = {
-  load ({ getters, commit }) {
+  load ({ state, getters, commit }) {
     const { page, rowsPerPage, sortBy, descending } = getters.pagination
-    return api.posts({
-      page,
-      limit: rowsPerPage,
-      sort: sortBy,
-      order: descending ? 'desc' : 'asc'
-    })
+    const params = {
+      _page: page,
+      _limit: rowsPerPage,
+      _sort: sortBy,
+      _order: descending ? 'desc' : 'asc'
+    }
+    for (const field of ['id', 'userId', 'title']) {
+      const value = state[field]
+      if (value) params[field] = value
+    }
+    return api.posts(params)
       .then(res => {
         commit('LOAD_LIST', {
           list: res.data,
@@ -48,6 +56,11 @@ const mutations = {
       rowsPerPage,
       sortBy,
       descending
+    })
+  },
+  SET_SEARCH (state, { field, value }) {
+    Object.assign(state, {
+      [field]: value
     })
   },
   LOAD_LIST (state, { list, total }) {

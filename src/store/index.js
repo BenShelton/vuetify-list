@@ -13,7 +13,10 @@ export default new Vuex.Store({
       'posts.page',
       'posts.rowsPerPage',
       'posts.sortBy',
-      'post.descending'
+      'post.descending',
+      'posts.id',
+      'posts.userId',
+      'posts.title'
     ]
   })],
   modules: {
