@@ -23,6 +23,7 @@
         <td class="text-xs-center">
           <v-btn
             icon
+            :to="{ name: postRoute, params: { id: props.item.id } }"
           >
             <v-icon>search</v-icon>
           </v-btn>
@@ -35,6 +36,7 @@
 <script>
 import { mapState, mapGetters, mapActions, mapMutations } from 'vuex'
 
+import routeNames from '@/router/routeNames'
 import SearchBox from '@/components/SearchBox.vue'
 
 export default {
@@ -51,7 +53,8 @@ export default {
         { text: 'User ID', value: 'userId' },
         { text: 'Title', value: 'title' },
         { text: 'View', align: 'center', sortable: false }
-      ]
+      ],
+      postRoute: routeNames.POST
     }
   },
 

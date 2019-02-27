@@ -1,11 +1,11 @@
 <template>
   <v-layout>
-    <v-data-table />
+    <v-card />
   </v-layout>
 </template>
 
 <script>
 export default {
-  name: 'About'
+  name: 'Post'
 }
 </script>
