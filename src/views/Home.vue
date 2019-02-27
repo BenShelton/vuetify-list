@@ -38,12 +38,21 @@ import { mapState, mapGetters, mapActions, mapMutations } from 'vuex'
 
 import routeNames from '@/router/routeNames'
 import SearchBox from '@/components/SearchBox.vue'
+import { POLLING_INTERVAL } from '@/constants'
 
 export default {
   name: 'Home',
 
   components: {
     SearchBox
+  },
+
+  mounted () {
+    this.resetPoll()
+  },
+
+  beforeDestroy () {
+    clearTimeout(this.pollTimeout)
   },
 
   data () {
@@ -54,7 +63,8 @@ export default {
         { text: 'Title', value: 'title', width: '60%' },
         { text: 'View', align: 'center', sortable: false, width: '10%' }
       ],
-      postRoute: routeNames.POST
+      postRoute: routeNames.POST,
+      pollTimeout: null
     }
   },
 
@@ -67,7 +77,7 @@ export default {
       },
       set (val) {
         this.setPagination(val)
-        this.loadPosts()
+        this.resetPoll(true)
       }
     }
   },
@@ -78,7 +88,12 @@ export default {
     }),
     ...mapMutations({
       setPagination: 'posts/SET_PAGINATION'
-    })
+    }),
+    resetPoll (immediateRefresh) {
+      clearTimeout(this.pollTimeout)
+      if (immediateRefresh) this.loadPosts()
+      this.pollTimeout = setTimeout(this.loadPosts, POLLING_INTERVAL)
+    }
   }
 }
 </script>

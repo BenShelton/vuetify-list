@@ -1,1 +1,2 @@
 export const SEARCH_DEBOUNCE_INTERVAL = 500
+export const POLLING_INTERVAL = 10000
