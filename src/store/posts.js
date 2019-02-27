@@ -29,7 +29,7 @@ const actions = {
     }
     for (const field of ['id', 'userId', 'title']) {
       const value = state[field]
-      if (value) params[field] = value
+      if (value) params[field + '_like'] = value
     }
     return api.posts(params)
       .then(res => {
