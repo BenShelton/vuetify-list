@@ -1,5 +1,11 @@
 <template>
-  <div class="about">
-    <h1>This is an about page</h1>
-  </div>
+  <v-layout>
+    <v-data-table />
+  </v-layout>
 </template>
+
+<script>
+export default {
+  name: 'About'
+}
+</script>
