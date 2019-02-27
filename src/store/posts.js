@@ -21,12 +21,14 @@ const actions = {
   load ({ state, getters, commit }) {
     commit('START_LOADING')
     const { page, rowsPerPage, sortBy, descending } = getters.pagination
+    // sorting, extracted from the v-data-table pagination
     const params = {
       _page: page,
       _limit: rowsPerPage,
       _sort: sortBy,
       _order: descending ? 'desc' : 'asc'
     }
+    // filtering, only applying filters if they are truthy
     for (const field of ['id', 'userId', 'title']) {
       const value = state[field]
       if (value) params[field + '_like'] = value

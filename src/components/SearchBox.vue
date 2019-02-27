@@ -32,6 +32,7 @@ export default {
   computed: {
     search: {
       get () {
+        // seeing as we don't know which field to track, forego using vuex helper method here
         return this.$store.state.posts[this.field]
       },
       set (val) {
@@ -52,6 +53,7 @@ export default {
       setSearch: 'posts/SET_SEARCH'
     }),
     debouncedLoad () {
+      // v-model.lazy doesn't work on v-text-fields so manually implement a debounce function instead
       clearTimeout(this.debounceTimeout)
       this.debounceTimeout = setTimeout(this.loadPosts, SEARCH_DEBOUNCE_INTERVAL)
     }

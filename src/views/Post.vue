@@ -15,6 +15,7 @@
     <v-layout v-if="!loading">
       <v-flex xs8>
         <v-card>
+          <!-- placeholder image, one isn't provided in the api -->
           <v-img src="https://picsum.photos/510/300?random" height="255" />
           <v-card-title class="display-2" v-text="title" />
           <v-card-text v-text="body" />

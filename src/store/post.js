@@ -1,5 +1,7 @@
 import api from '@/api'
 
+// TODO: The naming of this store module is not friendly seeing as 'posts' also exists, this should be changed to something less confusing
+
 const state = {
   id: null,
   userId: null,
@@ -14,6 +16,7 @@ const actions = {
   load ({ state, commit }, id) {
     if (state.id === id) return
     commit('START_LOADING')
+    // although _embed is an api option it doesn't seem to work, so make 2 requests instead
     return Promise.all([
       api.post({ id }),
       api.comments({ id })

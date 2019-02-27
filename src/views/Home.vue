@@ -71,6 +71,7 @@ export default {
   computed: {
     ...mapState('posts', ['list', 'total', 'loading']),
     ...mapGetters('posts', ['pagination']),
+    // seeing as we need to persist pagination through the store, we use a getter/setter here
     localPagination: {
       get () {
         return this.pagination
