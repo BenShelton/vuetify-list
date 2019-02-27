@@ -25,7 +25,7 @@
             icon
             :to="{ name: postRoute, params: { id: props.item.id } }"
           >
-            <v-icon>search</v-icon>
+            <v-icon>view_headline</v-icon>
           </v-btn>
         </td>
       </template>
@@ -49,10 +49,10 @@ export default {
   data () {
     return {
       headers: [
-        { text: 'Post ID', value: 'id' },
-        { text: 'User ID', value: 'userId' },
-        { text: 'Title', value: 'title' },
-        { text: 'View', align: 'center', sortable: false }
+        { text: 'Post ID', value: 'id', width: '15%' },
+        { text: 'User ID', value: 'userId', width: '15%' },
+        { text: 'Title', value: 'title', width: '60%' },
+        { text: 'View', align: 'center', sortable: false, width: '10%' }
       ],
       postRoute: routeNames.POST
     }

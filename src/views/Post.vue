@@ -1,5 +1,5 @@
 <template>
-  <v-container grid-list-lg>
+  <v-container grid-list-xl>
     <v-dialog
       v-model="loading"
       persistent
@@ -16,12 +16,12 @@
       <v-flex xs8>
         <v-card>
           <v-img src="https://picsum.photos/510/300?random" height="255" />
-          <v-card-title v-text="title" />
+          <v-card-title class="display-2" v-text="title" />
           <v-card-text v-text="body" />
         </v-card>
       </v-flex>
       <v-flex xs4>
-        <p class="subheading">
+        <p class="headline">
           Comments
         </p>
         <v-layout column class="elevation-1">
@@ -30,11 +30,11 @@
               v-for="comment of comments"
               :key="comment.id"
               column
-              class="pa-3"
+              class="pt-3 px-3"
             >
-              <p class="subheading" v-text="comment.email" />
-              <p class="subehading" v-text="comment.name" />
-              <p class="caption" v-text="comment.body" />
+              <p class="title mb-1" v-text="comment.name" />
+              <p class="caption" v-text="comment.email" />
+              <p class="body-1" v-text="comment.body" />
               <v-divider />
             </v-layout>
           </v-flex>
