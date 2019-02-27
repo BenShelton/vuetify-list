@@ -19,6 +19,7 @@ const getters = {
 
 const actions = {
   load ({ state, getters, commit }) {
+    commit('START_LOADING')
     const { page, rowsPerPage, sortBy, descending } = getters.pagination
     const params = {
       _page: page,
